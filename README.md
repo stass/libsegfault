@@ -16,7 +16,7 @@ be very hard if not impossible.
 
 Just link your program again libsegfault.  Or use LD_PRELOAD, e.g.
 ```shell
-env LD_PRELOAD=/path/to/libsegfault.so ./app
+% env LD_PRELOAD=/path/to/libsegfault.so ./app
 ```
 
 ## Building
@@ -30,9 +30,22 @@ After starting your program with libsegfault preloaded or linked in
 send the SEGV signal to the program.  You should see a stacktrace
 printed into the stderror.
 ```shell
-    env LD_PRELOAD=/path/to/libsegfault.so ./app
-    kill -SEGV ${PID}
+% env LD_PRELOAD=/path/to/libsegfault.so ./app
+% kill -SEGV ${PID}
 ```
+
+You should see something along the lines of:
+> Caught signal 11 (SEGV) in program sleep [27759]
+> 
+>    thread frame     IP       function
+>   [100689]  0: 0x800afbe0a: __sys_nanosleep()+0xa
+>   [100689]  1: 0x80120ebcc: _pthread_suspend_all_np()+0x10dc
+>   [100689]  2: 0x000400a38: <unknown>
+>   [100689]  3: 0x00040086f: <unknown>
+>   [100689]  4: 0x800620000: <unknown>
+> 
+> Backtrace: 0x800afbe0a 0x80120ebcc 0x400a38 0x40086f 0x800620000
+> Segmentation fault (core dumped)
 
 ## Configuration
 
@@ -46,10 +59,10 @@ separated signals.
 For example the following command will tell /libsegfault/ to intercept
 only SEGV and SIGILL (illegal instruction) conditions:
 ```shell
-    env SEGFAULT_SIGNALS="SEGV ILL" LD_PRELOAD=/path/to/libsegfault.so ./app
+% env SEGFAULT_SIGNALS="SEGV ILL" LD_PRELOAD=/path/to/libsegfault.so ./app
 ```
 
 To intercept all signals, user
 ```shell
-    env SEGFAULT_SIGNALS=all LD_PRELOAD=/path/to/libsegfault.so ./app
+% env SEGFAULT_SIGNALS=all LD_PRELOAD=/path/to/libsegfault.so ./app
 ```
