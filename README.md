@@ -63,7 +63,7 @@ only SEGV and SIGILL (illegal instruction) conditions:
 % env SEGFAULT_SIGNALS="SEGV ILL" LD_PRELOAD=/path/to/libsegfault.so ./app
 ```
 
-To intercept all signals, user
+To intercept all signals, use:
 ```shell
 % env SEGFAULT_SIGNALS=all LD_PRELOAD=/path/to/libsegfault.so ./app
 ```
