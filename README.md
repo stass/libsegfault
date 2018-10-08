@@ -8,7 +8,7 @@ A preloadable library that will print a stacktrace of the program when it crashe
 ## Why
 
 A lot of times the application resident memory size is so big that collecting
-core dumps is inpracticle.  However being able to see the crash stacktrace is
+core dumps is impractical.  However being able to see the crash stacktrace is
 desirable.  Without a stacktrace figuring our the reason of the crash might
 be very hard if not impossible.
 
